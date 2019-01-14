@@ -8,6 +8,10 @@ Installation
 At this point, the easiest way to install qbpy is from its
 `source <https://gitlab.com/abethke/qbpy>`_:
 
+.. code:: bash
+
+    pip install git+https://gitlab.com/abethke/qbpy.git@master
+
 
 
 Initialization
