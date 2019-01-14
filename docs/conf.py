@@ -22,7 +22,7 @@ from qbpy import __version__
 # -- Project information -----------------------------------------------------
 
 project = 'qbpy'
-copyright = '2018, DC Public Charter School Board'
+copyright = '2019, DC Public Charter School Board'
 author = 'Adam Bethke'
 version = __version__
 release = __version__
