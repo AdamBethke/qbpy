@@ -1,0 +1,22 @@
+test:
+    image: python:latest
+    script:
+      - pip3 install pytest
+      - pip3 install pytest-cov
+      - pip3 install .
+      - pytest --cov=qbpy
+
+pages:
+  image: python:latest
+  script:
+    - apt-get install make
+    - pip3 install sphinx
+    - pip3 install sphinx_rtd_theme
+    - pip3 install .
+    - make html
+    - mv build/html/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
