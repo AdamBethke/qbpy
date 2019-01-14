@@ -6,7 +6,7 @@ Installation
 ------------
 
 At this point, the easiest way to install qbpy is from its
-`source <>`_:
+`source <https://gitlab.com/abethke/qbpy>`_:
 
 
 
