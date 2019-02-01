@@ -208,7 +208,6 @@ class QuickBase:
         :type parameters: dictionary
         """
         base_file_url = 'https://{realm}.{domain}/up/{dbid}/a/r{rid}/e{fid}/v0'
-        directory = self.parameters['directory']
         download_parameters = dict(self.parameters, **(parameters or {}))
         tokens = {
             key: download_parameters[key]
@@ -216,7 +215,8 @@ class QuickBase:
             if key in download_parameters
         }
 
-        doquery = self.api('API_DoQuery', parameters) # identify rows to download
+        # identify rows to download
+        doquery = self.api('API_DoQuery', download_parameters)
 
         # generate a list of files
         files = []
@@ -235,6 +235,8 @@ class QuickBase:
             )
 
         # download files
+        directory = download_parameters['directory']
+        print(directory)
         for file in files:
             download = requests.get(file[0], tokens)
             with open(os.path.join(directory, file[1]), 'wb') as quickbase_download:
