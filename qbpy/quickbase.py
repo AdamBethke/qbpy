@@ -210,7 +210,6 @@ class QuickBase:
         base_file_url = 'https://{realm}.{domain}/up/{dbid}/a/r{rid}/e{fid}/v0'
         directory = self.parameters['directory']
         download_parameters = dict(self.parameters, **(parameters or {}))
-        files = []
         tokens = {
             key: download_parameters[key]
             for key in ['apptoken', 'ticket', 'usertoken']
@@ -220,6 +219,7 @@ class QuickBase:
         doquery = self.api('API_DoQuery', parameters) # identify rows to download
 
         # generate a list of files
+        files = []
         for row in doquery.response['table']['records']['record']:
             files.append(
                 (
@@ -241,7 +241,7 @@ class QuickBase:
                 for chunk in download.iter_content(1024):
                     quickbase_download.write(chunk)
 
-        return files
+        return doquery
 
 
     def json(self, indent=4):
