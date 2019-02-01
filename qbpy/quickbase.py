@@ -208,40 +208,43 @@ class QuickBase:
         :type parameters: dictionary
         """
         base_file_url = 'https://{realm}.{domain}/up/{dbid}/a/r{rid}/e{fid}/v0'
-        directory = self.parameters['directory']
         download_parameters = dict(self.parameters, **(parameters or {}))
-        files = []
         tokens = {
             key: download_parameters[key]
             for key in ['apptoken', 'ticket', 'usertoken']
             if key in download_parameters
         }
 
-        doquery = self.api('API_DoQuery', parameters) # identify rows to download
+        # identify rows to download
+        doquery = self.api('API_DoQuery', download_parameters)
 
         # generate a list of files
-        for row in doquery.response['table']['records']['record']:
-            files.append(
-                (
-                    base_file_url.format(
-                        realm=download_parameters['realm'],
-                        domain=download_parameters['domain'],
-                        dbid=download_parameters['dbid'],
-                        rid=row['rid'],
-                        fid=file_fid
-                    ),
-                    str(row['rid']) + '-' + row[file_fid]
+        files = []
+        if not doquery.pandas().empty:
+            for row in doquery.response['table']['records']['record']:
+                files.append(
+                    (
+                        base_file_url.format(
+                            realm=download_parameters['realm'],
+                            domain=download_parameters['domain'],
+                            dbid=download_parameters['dbid'],
+                            rid=str(row['rid']),
+                            fid=str(file_fid),
+                        ),
+                        str(row['rid']) + '-' + str(row[file_fid])
+                    )
                 )
-            )
 
-        # download files
-        for file in files:
-            download = requests.get(file[0], tokens)
-            with open(os.path.join(directory, file[1]), 'wb') as quickbase_download:
-                for chunk in download.iter_content(1024):
-                    quickbase_download.write(chunk)
+            # download files
+            directory = download_parameters['directory']
+            print(directory)
+            for file in files:
+                download = requests.get(file[0], tokens)
+                with open(os.path.join(directory, file[1]), 'wb') as quickbase_download:
+                    for chunk in download.iter_content(1024):
+                        quickbase_download.write(chunk)
 
-        return files
+        return doquery
 
 
     def json(self, indent=4):
