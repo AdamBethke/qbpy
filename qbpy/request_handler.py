@@ -130,7 +130,6 @@ class _RequestHandler:
                             'errdetail': 'CDATA payload objects cannot be None',
                         })
 
-            print(xml.tostring(qdbapi).decode())
             return xml.tostring(qdbapi).decode()
 
         # lowercase all payload parameters
@@ -155,9 +154,6 @@ class _RequestHandler:
         Sends request to Quick Base, combining the url, payload, and headers
         to deliver an API call to Quick Base for processing.
         """
-        print(self.url)
-        print(self.payload)
-        print(self.headers)
         return self.method(self.url, self.payload, headers=self.headers)
 
     @property
