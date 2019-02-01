@@ -12,6 +12,8 @@ def response_formatter_default(res):
 
 def response_formatter_api_doquery(res):
     """Convert API_DoQuery response to usable format."""
+    if not isinstance(res['table']['records']['record'], list):
+        res['table']['records']['record'] = [res['table']['records']['record']]
     for record in res['table']['records']['record']:
         for column in record['f']:
             if 'value' in column:
