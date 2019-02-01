@@ -18,11 +18,14 @@ def response_formatter_api_doquery(res):
         if not isinstance(res['table']['records']['record'], list):
             res['table']['records']['record'] = [res['table']['records']['record']]
         for record in res['table']['records']['record']:
+            if not isinstance(record['f'], list):
+                record['f'] = [record['f']]
             for column in record['f']:
                 if 'value' in column:
                     record[column['id']] = column['value']
             del record['f']
     return res
+
 
 
 def response_formatter_api_userroles(res):

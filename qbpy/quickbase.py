@@ -221,7 +221,6 @@ class QuickBase:
         # generate a list of files
         files = []
         if not doquery.pandas().empty:
-
             for row in doquery.response['table']['records']['record']:
                 files.append(
                     (
