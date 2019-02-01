@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='qbpy',
-    version='0.9.0',
+    version='0.9.1',
     description='Python Quick Base API Wrapper',
     long_description='',
     url='https://gitlab.com/abethke/qbpy.git',
@@ -13,6 +13,7 @@ setup(
     install_requires=[
         'lxml',
         'requests',
+        'numpy',
         'pandas',
         'xmltodict',
     ]
