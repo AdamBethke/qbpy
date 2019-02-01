@@ -220,28 +220,30 @@ class QuickBase:
 
         # generate a list of files
         files = []
-        for row in doquery.response['table']['records']['record']:
-            files.append(
-                (
-                    base_file_url.format(
-                        realm=download_parameters['realm'],
-                        domain=download_parameters['domain'],
-                        dbid=download_parameters['dbid'],
-                        rid=str(row['rid']),
-                        fid=str(file_fid),
-                    ),
-                    str(row['rid']) + '-' + str(row[file_fid])
-                )
-            )
+        if not doquery.pandas().empty:
 
-        # download files
-        directory = download_parameters['directory']
-        print(directory)
-        for file in files:
-            download = requests.get(file[0], tokens)
-            with open(os.path.join(directory, file[1]), 'wb') as quickbase_download:
-                for chunk in download.iter_content(1024):
-                    quickbase_download.write(chunk)
+            for row in doquery.response['table']['records']['record']:
+                files.append(
+                    (
+                        base_file_url.format(
+                            realm=download_parameters['realm'],
+                            domain=download_parameters['domain'],
+                            dbid=download_parameters['dbid'],
+                            rid=str(row['rid']),
+                            fid=str(file_fid),
+                        ),
+                        str(row['rid']) + '-' + str(row[file_fid])
+                    )
+                )
+
+            # download files
+            directory = download_parameters['directory']
+            print(directory)
+            for file in files:
+                download = requests.get(file[0], tokens)
+                with open(os.path.join(directory, file[1]), 'wb') as quickbase_download:
+                    for chunk in download.iter_content(1024):
+                        quickbase_download.write(chunk)
 
         return doquery
 
