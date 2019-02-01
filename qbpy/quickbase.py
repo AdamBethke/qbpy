@@ -227,10 +227,10 @@ class QuickBase:
                         realm=download_parameters['realm'],
                         domain=download_parameters['domain'],
                         dbid=download_parameters['dbid'],
-                        rid=row['rid'],
-                        fid=file_fid
+                        rid=str(row['rid']),
+                        fid=str(file_fid),
                     ),
-                    str(row['rid']) + '-' + row[file_fid]
+                    str(row['rid']) + '-' + str(row[file_fid])
                 )
             )
 
