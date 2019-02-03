@@ -6,7 +6,19 @@ Unreleased
 ------------
 
 
+[0.9.2] - 2019-02-03
+--------------------
+
+  - Adds a suggestion for how to view the original response format when working
+  with an API method which has a custom response formatter as a default
+
+  - Updates to the response formatter for API_DoQuery; previously, there was an
+  issue where the response formatter was dropping the column if there was no data
+  in the column for any record being returned
+
+
 [0.9.1] - 2019-02-01
+--------------------
 
   - Updates to the response object returned by qb.download_files; the response
   is now the raw API_DoQuery response used to download files, not a modified
