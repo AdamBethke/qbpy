@@ -163,6 +163,15 @@ For example, this is the default formatter for API_DoQuery:
             del record['f']
         return res
 
+If you ever need to work with the original response for an API Method where we've
+established a default formatter, you can do so easily by providing a custom
+response formatter which makes no modifications like this:
+
+.. code:: python
+
+    qb.api('API_DoQuery', {...}, repsonse_formatter=lambda x:x)
+
+
 Macros
 ------
 

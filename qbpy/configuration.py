@@ -23,9 +23,10 @@ def response_formatter_api_doquery(res):
             for column in record['f']:
                 if 'value' in column:
                     record[column['id']] = column['value']
+                else:
+                    record[column['id']] = None
             del record['f']
     return res
-
 
 
 def response_formatter_api_userroles(res):
