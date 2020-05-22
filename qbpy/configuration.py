@@ -381,7 +381,8 @@ CONFIGURATION = {
             'returnpercentage',
             'parameters',
             'includerids',
-            'usefids'
+            'usefids',
+            'options',
         ],
         'dataframe_formatter': dataframe_formatter_api_doquery,
         'method': get,

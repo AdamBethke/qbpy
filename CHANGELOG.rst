@@ -6,6 +6,11 @@ Unreleased
 ------------
 
 
+[0.9.3] - 2020-05-22
+--------------------
+
+  - Adds `options` to the list of acceptable parameters for an API_DoQuery call
+
 [0.9.2] - 2019-02-03
 --------------------
 

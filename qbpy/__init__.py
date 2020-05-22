@@ -1,4 +1,4 @@
 """Package level imports"""
 
-__version__ = '0.9.2'
+__version__ = '0.9.3'
 from qbpy.quickbase import QuickBase
